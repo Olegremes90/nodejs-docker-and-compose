@@ -12,7 +12,7 @@ services:
     depends_on:
       - database
     networks:
-      - internal
+      - backend_network
 
   frontend:
     container_name: frontend
@@ -22,7 +22,7 @@ services:
       - "8081:80"
     restart: always
     networks:
-      - internal
+      - frontend_network
 
   database:
     container_name: database
@@ -36,8 +36,10 @@ services:
       POSTGRES_DB: kupipodariday
     restart: always
     networks:
-      - internal
+      - backend_network
 
 networks:
-  internal:
+  backend_network:
+    driver: bridge
+  frontend_network:
     driver: bridge
